@@ -40,11 +40,12 @@ class Preprocess_Pipeline:
         self.data['question']=self.data.apply(lambda row:self.tknzr.tokenize(row['question']), axis=1)
         self.data['question']=self.data.apply(lambda row:[word for word in row['question'] if word.isalnum()], axis=1)
         self.data['question']=self.data.apply(lambda row:[word for word in row['question']if word not in stop_words],axis=1)
+        self.data['question']=self.data.apply(lambda row: self.lemmatize_phrase(row['question']),axis=1)
         self.data['title']=self.data.apply(lambda row:self.tknzr.tokenize(row['title']), axis=1)
+       
         self.data['title']=self.data.apply(lambda row:[word for word in row['title'] if word.isalnum()], axis=1)
-        self.data['title']==self.data.apply(lambda row:[word for word in row['title']if word not in stop_words],axis=1)
-        self.data['question']=self.data.apply(lambda row: self.lemmatize_phrase(row['question']))
-        self.data['title']=self.data.apply(lambda row: self.lemmatize_phrase(row['title']))
+        self.data['title']=self.data.apply(lambda row:[word for word in row['title']if word not in stop_words],axis=1)
+        self.data['title']=self.data.apply(lambda row: self.lemmatize_phrase(row['title']),axis=1)
 
       
 
@@ -76,12 +77,13 @@ class Preprocess_Pipeline:
 
     def trigger_pipeline(self):
         self.tokenize_clean_data()
-        def_res= self.data.loc[:,['title','main_cat','question','answer']]
-        return def_res
+        result=self.data.loc[:,['title','main_cat','question','answer']]
+        return result
 
+    
 
-
-
-process_obj= Preprocess_Pipeline('Preprocessing/dataset_final.pkl')
-df_res=process_obj.trigger_pipeline
-print(df_res)
+process_obj= Preprocess_Pipeline('Code/dataset_final.pkl')
+df_res=process_obj.trigger_pipeline()
+print(df_res.head())
+# result=pd.DataFrame(df_res,columns=['title','main_cat','question','answer'])
+# print(result.head())
