@@ -5,7 +5,7 @@ import pandas as pd
 df=pd.read_pickle('Code/required_dataset.pkl')
 # printing the unique categories in the dataset
 print(df.main_cat.unique())
-
-rslt=df[df['main_cat']=='All Electronics']
-print(rslt.loc[0:5,['question','answer']])
-print(rslt.main_cat.unique())
+print(len(df))
+rslt=df.loc[df['main_cat']=="Computers"]
+print(rslt.loc[:,['question','answer']])
+print(len(rslt))
