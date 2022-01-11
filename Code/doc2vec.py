@@ -3,7 +3,7 @@ import pandas as pd
 import nltk
 from gensim.test.utils import common_texts
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
-from numba import jit, cuda
+
 # intents file as a dictionary with intent tag and key words associated with each intent
 intents={
      
@@ -59,20 +59,20 @@ class Doc2VecModel:
         self.model.build_vocab(self.tagged_doc)
         self.epoch=epoch
 
-    # trains the model 
     
-    def train_model(self):
+    # trains the model 
+    def train_model(self,pathname):
         
         
         print("starting model")    
         self.model.train(self.tagged_doc,total_examples=self.model.corpus_count,epochs=self.model.epochs)
         print('training done')
            
-        self.model.save('Code/Doc2Vec.model')
+        self.model.save(pathname)
         print("model saved")
         return None
 
 
-final_corpus=create_corpus('Code/required_dataset.pkl')
+final_corpus=create_corpus('Datasets/required_dataset.pkl')
 model=Doc2VecModel(epoch=100,corpus=final_corpus,learning_rate=0.025,vec_size=30)
-model.train_model()
+model.train_model('Models/Doc2Vec.model')
