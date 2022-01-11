@@ -78,12 +78,8 @@ class Preprocess_Pipeline:
     def trigger_pipeline(self):
         self.tokenize_clean_data()
         result=self.data.loc[:,['title','main_cat','question','answer']]
+        
         return result
 
     
 
-process_obj= Preprocess_Pipeline('Code/dataset_final.pkl')
-df_res=process_obj.trigger_pipeline()
-print(df_res.head())
-# result=pd.DataFrame(df_res,columns=['title','main_cat','question','answer'])
-# print(result.head())
