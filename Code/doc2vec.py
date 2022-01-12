@@ -16,8 +16,9 @@ intents={
     "Display": "cable work macbook nook monitor screen card slot driver adapter graphic lenses fit mount camera flash frame cell phone tablet",
     "Charging": "cable plug charge compatible port charger",
     "Connection": "wifi compatible jack plug able wireless phone android iphone antenna bluetooth",
-    "Product_description": "price colour size inch width height fit cover do have specification sales discount how much money water proof warranty model",
-    "Issue" : "issue not work properly cannot fix"
+    "Product_description": "price information colour size inch width height fit cover do have specification sales discount how much money water proof warranty model",
+    "Issue" : "issue not work properly cannot fix update",
+    "Greeting": "hello hi how be you what up morning"
 }
 
 # function that add the intent values  to the required questions of the dataset based on the categories
@@ -33,6 +34,7 @@ def create_corpus(filename):
    
     final_corpus= pd.concat([corpus,pd.Series(intent_df_tkzr)],axis=0)
     return final_corpus
+
 
 
  
@@ -73,6 +75,6 @@ class Doc2VecModel:
         return None
 
 
-final_corpus=create_corpus('Datasets/required_dataset.pkl')
-model=Doc2VecModel(epoch=100,corpus=final_corpus,learning_rate=0.025,vec_size=30)
-model.train_model('Models/Doc2Vec.model')
+# final_corpus=create_corpus('Datasets/required_dataset.pkl')
+# model=Doc2VecModel(epoch=100,corpus=final_corpus,learning_rate=0.025,vec_size=30)
+# model.train_model('Models/Doc2Vec_2.model')
